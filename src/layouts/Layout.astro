@@ -7,53 +7,50 @@ const baseUrl = import.meta.env.BASE_URL;
 <html lang="it">
     <head>
         <meta charset="utf-8" />
-        <title>{titolo} | La Fratina Vintage | Restauro & Vendita</title>
-        <meta name="description" content="La Fratina Vintage - Restauro e vendita mobili e oggetti vintage" />
+        <title>{titolo} | La Fratina Vintage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="index, follow" />
-        
-        <link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl}apple-touch-icon.png`} />
-        <link rel="icon" type="image/png" sizes="32x32" href={`${baseUrl}favicon-32x32.png`} />
-        <link rel="icon" type="image/png" sizes="16x16" href={`${baseUrl}favicon-16x16.png`} />
-        <link rel="manifest" href={`${baseUrl}site.webmanifest`} />
-
-        <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
-            rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     </head>
-    <body class="bg-brand-green font-body text-brand-brown">
+    <body class="bg-brand-green font-body text-brand-brown min-h-screen">
         <header class="header-vintage">
             <nav class="max-w-7xl mx-auto flex justify-between items-center">
-    <a href={baseUrl} class="flex flex-col no-underline group">
-        <span class="text-2xl md:text-4xl font-display font-black text-brand-green leading-none tracking-tighter group-hover:scale-[1.01] transition-transform">
-            La Fratina Vintage
-        </span>
-    </a>
-    <div class="hidden md:flex items-center gap-8 font-bold text-brand-green">
-        ... resto della navigazione ...
-    </div>
-</nav>
+                <a href={baseUrl} class="flex flex-col no-underline group">
+                    <span class="text-2xl md:text-4xl font-display font-black text-brand-green leading-none tracking-tighter group-hover:scale-[1.01] transition-transform">
+                        La Fratina Vintage
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-6 font-bold text-brand-green">
+                    <a href={baseUrl} class="nav-link text-xs tracking-tighter">Home</a>
+                    <a href={`${baseUrl}#chi-siamo`} class="nav-link text-xs tracking-tighter">Chi Siamo</a>
+                    <a href={`${baseUrl}catalogo`} class="nav-link text-xs tracking-tighter">Collezione</a>
+                    <a href={`${baseUrl}#galleria`} class="nav-link text-xs tracking-tighter">Galleria</a>
+                    <a href={`${baseUrl}#eventi`} class="nav-link text-xs tracking-tighter">Calendario</a>
+                    
+                    <a 
+                        href={`${baseUrl}#contatti`} 
+                        class="bg-brand-brown text-white px-4 py-2 text-[10px] uppercase tracking-widest hover:bg-brand-orange transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none"
+                    >
+                        Contatti
+                    </a>
+                </div>
+                
+                <button class="md:hidden text-2xl text-brand-green">☰</button>
+            </nav>
         </header>
 
         <div class="h-32 md:h-40"></div>
 
-        <main class="max-w-7xl mx-auto px-6 pb-20">
+        <main class="max-w-7xl mx-auto px-6 pb-20 relative z-10">
             <slot />
         </main>
 
-        <footer class="bg-brand-brown text-brand-cream py-12 px-6 mt-20">
+        <footer class="bg-brand-brown text-brand-cream py-12 px-6">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-                <div class="text-center md:text-left">
-                    <h2 class="font-display text-3xl text-brand-yellow mb-2 font-black italic">La Fratina</h2>
-                    <p class="text-xs opacity-60 font-mono tracking-widest uppercase">
-                        &copy; 2025 Alessandro & Luigina | Tutti i diritti riservati
-                    </p>
-                </div>
-                
-                <div class="flex gap-6 font-bold text-sm uppercase tracking-widest">
-                    <a href="#" class="text-brand-yellow hover:text-brand-orange border-b border-brand-yellow transition-colors">Instagram</a>
-                    <a href="#" class="text-brand-yellow hover:text-brand-orange border-b border-brand-yellow transition-colors">Facebook</a>
+                <h2 class="font-display text-3xl text-brand-yellow font-black italic">La Fratina</h2>
+                <div class="flex gap-6 font-bold text-sm uppercase">
+                    <a href="#" class="text-brand-yellow hover:text-brand-orange border-b border-brand-yellow">Instagram</a>
+                    <a href="#" class="text-brand-yellow hover:text-brand-orange border-b border-brand-yellow">Facebook</a>
                 </div>
             </div>
         </footer>
