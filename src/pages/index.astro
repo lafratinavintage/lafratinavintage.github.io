@@ -42,7 +42,7 @@ const prodotti = await getCollection("catalogo");
                             {p.data.descrizione}
                         </p>
                         <a
-                            href={`/catalogo/${p.id}`}
+                            href={`${import.meta.env.BASE_URL}catalogo/${p.id}`}
                             class="block w-full text-center py-3 bg-brand-brown text-white font-bold hover:bg-brand-orange uppercase tracking-widest transition-colors"
                         >
                             Dettagli
