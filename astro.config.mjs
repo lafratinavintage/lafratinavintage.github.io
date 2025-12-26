@@ -13,7 +13,7 @@ export default defineConfig({
     ? `https://${username}.github.io`
     : "http://localhost:4321",
   // If in GitHub Actions, use /repo-name/ as the subpath
-  base: GITHUB_REPOSITORY ? `/${repoName}/` : "/",
+  base: GITHUB_REPOSITORY ? `/${repoName}/` : "",
 
   vite: {
     plugins: [tailwindcss()],

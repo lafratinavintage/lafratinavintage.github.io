@@ -1,11 +1,14 @@
 {
-  "nome": "Test Product 2",
-  "descrizione": "This is a test description for product number 2. It can be quite long to test how ellipses are handled.",
-  "prezzo": 25.5,
+  "nome": "Radio a Valvole in Bachelite",
+  "descrizione": "Rara radio d'epoca con scocca in bachelite marrone. Atmosfera autentica degli anni '50.",
+  "prezzo": 95,
+  "valuta": "€",
   "imageUrls": [
-    "https://via.placeholder.com/150/FF0000/FFFFFF?text=Product2_1",
-    "https://via.placeholder.com/150/00FF00/000000?text=Product2_2"
+    "https://images.unsplash.com/photo-1558941572-ec88028976b9?q=80&w=1000"
   ],
-  "categoria": "Test Category",
-  "stato": "New"
+  "categoria": "Elettronica",
+  "stato": "Usato",
+  "dimensioni": "25x15x12 cm",
+  "anno": 1955,
+  "disponibile": true
 }

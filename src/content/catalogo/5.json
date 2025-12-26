@@ -1,11 +1,14 @@
 {
-  "nome": "Test Product 5",
-  "descrizione": "The fifth test product, featuring a description designed to be long and test the truncation and ellipsis display in the UI.",
-  "prezzo": 55.99,
+  "nome": "Lampada Ministeriale",
+  "descrizione": "Classica lampada da scrivania con base in ottone e paralume in vetro verde. Un classico degli uffici legali.",
+  "prezzo": 75,
+  "valuta": "€",
   "imageUrls": [
-    "https://via.placeholder.com/150/8A2BE2/FFFFFF?text=Product5_1",
-    "https://via.placeholder.com/150/FF4500/000000?text=Product5_2"
+    "https://images.unsplash.com/photo-1534073828943-f801091bb18c?q=80&w=1000"
   ],
-  "categoria": "Apparel",
-  "stato": "Good"
+  "categoria": "Illuminazione",
+  "stato": "Nuovo (Fondo di magazzino)",
+  "dimensioni": "40 cm altezza",
+  "anno": 1990,
+  "disponibile": true
 }

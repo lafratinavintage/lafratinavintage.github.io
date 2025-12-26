@@ -1,11 +1,14 @@
 {
-  "nome": "Test Product 4",
-  "descrizione": "This is the fourth test product. Its description is also quite lengthy to ensure the ellipsis behavior is correctly tested across various inputs.",
-  "prezzo": 120.75,
+  "nome": "Giradischi Portatile Vintage",
+  "descrizione": "Giradischi a valigetta con finiture in ecopelle rossa. Perfetto per ascoltare vinili con stile.",
+  "prezzo": 110,
+  "valuta": "€",
   "imageUrls": [
-    "https://via.placeholder.com/150/FF69B4/FFFFFF?text=Product4_1",
-    "https://via.placeholder.com/150/00CED1/000000?text=Product4_2"
+    "https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=1000"
   ],
-  "categoria": "Home Goods",
-  "stato": "Like New"
+  "categoria": "Musica",
+  "stato": "Buono",
+  "dimensioni": "35x25x10 cm",
+  "anno": 1982,
+  "disponibile": true
 }

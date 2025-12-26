@@ -1,11 +1,14 @@
 {
-  "nome": "Test Product 3",
-  "descrizione": "Another test product description. This one is also designed to be long enough to test the ellipsis functionality of the display.",
-  "prezzo": 75.00,
+  "nome": "Poltrona Mid-Century Moderna",
+  "descrizione": "Elegante poltrona in velluto verde bosco con gambe in legno di faggio. Design ispirato ai maestri degli anni '60.",
+  "prezzo": 340,
+  "valuta": "€",
   "imageUrls": [
-    "https://via.placeholder.com/150/0000FF/FFFFFF?text=Product3_1",
-    "https://via.placeholder.com/150/FFFF00/000000?text=Product3_2"
+    "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=1000"
   ],
-  "categoria": "Electronics",
-  "stato": "Used"
+  "categoria": "Arredamento",
+  "stato": "Eccellente",
+  "dimensioni": "70x85x75 cm",
+  "anno": 1968,
+  "disponibile": false
 }

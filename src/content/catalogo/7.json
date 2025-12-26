@@ -1,11 +1,14 @@
 {
-  "nome": "Test Product 7",
-  "descrizione": "The seventh test product. This description is also made to be long to properly test how the UI handles truncated text with ellipses.",
-  "prezzo": 15.00,
+  "nome": "Set 4 Sedie Thonet",
+  "descrizione": "Set originale di sedie in legno curvato e paglia di Vienna. Perfette per una cucina bohémien.",
+  "prezzo": 420,
+  "valuta": "€",
   "imageUrls": [
-    "https://via.placeholder.com/150/D2691E/FFFFFF?text=Product7_1",
-    "https://via.placeholder.com/150/6495ED/000000?text=Product7_2"
+    "https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1000"
   ],
-  "categoria": "Toys",
-  "stato": "Acceptable"
+  "categoria": "Arredamento",
+  "stato": "Usato",
+  "dimensioni": "45x45x90 cm",
+  "anno": 1940,
+  "disponibile": true
 }

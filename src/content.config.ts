@@ -17,4 +17,15 @@ const catalogo = defineCollection({
   }),
 });
 
-export const collections = { catalogo };
+const eventi = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/eventi" }),
+  schema: z.object({
+    titolo: z.string(),
+    data: z.date({ coerce: true }), // Zod trasforma stringhe ISO in oggetti Date
+    orario: z.string(),
+    luogo: z.string(),
+    descrizione: z.string(),
+  }),
+});
+
+export const collections = { catalogo, eventi };
