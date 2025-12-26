@@ -2,10 +2,10 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 
-// 1. Logica Prodotti
+// 1. Logica Prodotti: Ora ne prendiamo solo 6 invece di 9
 const tuttiProdotti = await getCollection("catalogo");
-const prodottiMostrati = tuttiProdotti.slice(0, 9);
-const mostraLinkCatalogo = tuttiProdotti.length > 9;
+const prodottiMostrati = tuttiProdotti.slice(0, 6);
+const mostraLinkCatalogo = tuttiProdotti.length > 6;
 
 // 2. Logica Eventi
 const tuttiEventi = await getCollection("eventi");
@@ -26,12 +26,11 @@ const contatti = {
 
 <Layout titolo="Home">
     <section id="home" class="py-12 md:py-20">
-        <div class="max-w-3xl">
-            <h2 class="text-2xl md:text-3xl font-display font-black leading-tight mb-6 text-brand-brown italic tracking-tight">
-                Benvenuto nella mia collezione di <span class="text-brand-yellow drop-shadow-[1px_1px_0px_rgba(0,0,0,1)]">Design Vintage</span> degli anni '50, '60, '70 e '80.
-            </h2>
-            
-            <div class="space-y-4 text-base md:text-lg font-body bg-brand-yellow/5 border-l-4 border-brand-orange p-5 backdrop-blur-sm leading-relaxed text-brand-brown">
+        <div class="max-w-4xl">
+            <div class="space-y-6 text-xl md:text-2xl font-body font-bold text-brand-yellow leading-relaxed">
+                <p>
+                    Benvenuto nella mia collezione di Design Vintage degli anni '50, '60, '70 e '80.
+                </p>
                 <p>
                     Ogni pezzo è stato accuratamente selezionato, restaurato con cura e riportato al suo antico splendore.
                 </p>
@@ -43,7 +42,7 @@ const contatti = {
     </section>
 
     <section id="catalogo" class="py-20">
-        <h2 class="text-3xl font-display font-black text-brand-yellow italic drop-shadow-[2px_2px_0px_rgba(26,26,26,1)] mb-12">
+        <h2 class="text-3xl font-display font-black text-brand-yellow italic drop-shadow-[2px_2px_0px_rgba(26,26,26,1)] mb-12 uppercase">
             Collezione Attuale
         </h2>
         
@@ -87,7 +86,7 @@ const contatti = {
     </section>
 
     <section id="eventi" class="py-20">
-        <h2 class="text-3xl font-display font-black mb-16 text-brand-brown italic">Prossimi Eventi</h2>
+        <h2 class="text-3xl font-display font-black mb-16 text-brand-brown italic uppercase">Prossimi Eventi</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
             {
@@ -119,7 +118,7 @@ const contatti = {
 
     <section id="contatti" class="py-24 text-center">
         <div class="max-w-3xl mx-auto bg-brand-yellow border-4 border-brand-brown p-10 shadow-retro">
-            <h2 class="text-3xl md:text-4xl font-display font-black mb-6 italic tracking-tighter">
+            <h2 class="text-3xl md:text-4xl font-display font-black mb-6 italic uppercase tracking-tighter">
                 Ti interessa <span class="text-brand-orange">un pezzo?</span>
             </h2>
             <p class="text-base font-body mb-10 font-bold">
