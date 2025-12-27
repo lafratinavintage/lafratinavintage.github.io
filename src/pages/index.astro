@@ -39,12 +39,13 @@ const contatti = {
         </div>
     </section>
 
-    <section id="catalogo" class="py-20">
-        <h2 class="text-3xl font-display font-black text-brand-yellow italic drop-shadow-[2px_2px_0px_rgba(26,26,26,1)] mb-12 uppercase">
-            Collezione Attuale
+    <section id="catalogo" class="py-20 text-center">
+        <h2 class="font-display font-bold text-4xl md:text-5xl text-brand-yellow relative inline-block mb-16 uppercase">
+            Collezione
+            <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-brand-orange"></span>
         </h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 text-left">
             {
                 prodottiMostrati.map((p) => (
                     <a href={`${baseUrl}catalogo/${p.id}`} class="card-vintage group">
@@ -76,17 +77,20 @@ const contatti = {
             mostraLinkCatalogo && (
                 <div class="mt-16 text-center">
                     <a href={`${baseUrl}catalogo`} class="inline-block bg-brand-orange text-white border-4 border-brand-brown px-10 py-4 text-lg font-bold shadow-retro hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-                        Vedi tutto il Catalogo →
+                        Vedi tutta la Collezione →
                     </a>
                 </div>
             )
         }
     </section>
 
-    <section id="eventi" class="py-20">
-        <h2 class="text-3xl font-display font-black mb-16 text-brand-brown italic uppercase">Prossimi Eventi</h2>
+    <section id="eventi" class="py-20 text-center">
+        <h2 class="font-display font-bold text-4xl md:text-5xl text-brand-yellow relative inline-block mb-16 uppercase">
+            Prossimi Eventi
+            <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-brand-orange"></span>
+        </h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto text-left">
             {
                 eventi.map((e) => (
                     <div class="event-card group hover:-translate-y-1 transition-all">
@@ -116,8 +120,9 @@ const contatti = {
 
     <section id="contatti" class="py-24 text-center">
         <div class="max-w-3xl mx-auto bg-brand-yellow border-4 border-brand-brown p-10 shadow-retro">
-            <h2 class="text-3xl md:text-4xl font-display font-black mb-6 italic uppercase tracking-tighter">
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-brand-brown relative inline-block mb-8 uppercase tracking-tighter">
                 Ti interessa <span class="text-brand-orange">un pezzo?</span>
+                <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-16 h-1 bg-brand-brown/30"></span>
             </h2>
             <p class="text-base font-body mb-10 font-bold">
                 Contattaci per foto extra o per commissionarci una ricerca specifica.
