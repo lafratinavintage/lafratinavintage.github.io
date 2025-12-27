@@ -21,9 +21,9 @@ const padri = Object.keys(strutturaCategorie).sort();
 <Layout titolo="La Nostra Collezione">
     <section class="py-12">
         <h1 class="text-4xl md:text-6xl font-display text-brand-orange leading-none tracking-tighter capitalize">
-    La Nostra Collezione
-</h1>
-        <p class="text-xl max-w-2xl text-brand-yellow font-body mt-6 italic">
+            La Nostra Collezione
+        </h1>
+        <p class="text-lg max-w-2xl text-brand-yellow font-body mt-4 italic">
             Oggetti selezionati con cura, pronti a vivere una nuova storia.
         </p>
     </section>
@@ -52,7 +52,7 @@ const padri = Object.keys(strutturaCategorie).sort();
                     
                     {padri.map(padre => (
                         <div class="relative sub-group-container">
-                            <button class="w-full text-left p-3 border-b-2 border-brand-brown flex justify-between items-center hover:bg-brand-orange hover:text-white uppercase text-xs font-bold parent-toggle" data-category={padre}>
+                            <button class="w-full text-left p-3 border-b-2 border-brand-brown flex justify-between items-center hover:bg-brand-orange hover:text-white uppercase text-xs font-bold filter-btn parent-toggle" data-category={padre}>
                                 {padre} 
                                 {strutturaCategorie[padre].size > 0 && <span class="text-[10px] transform transition-transform arrow">▶</span>}
                             </button>
@@ -101,22 +101,14 @@ const padri = Object.keys(strutturaCategorie).sort();
 </Layout>
 
 <style>
-    /* Utility per nascondere scrollbar */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     
-    .rotate-90 { transform: rotate(90deg); }
+    .sub-group-container:hover .sub-dropdown { display: block !important; }
+    .sub-group-container:hover .arrow { transform: rotate(90deg); }
 
-    /* Animazione sezione filtri */
-    #filterSection {
-        transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
-    }
-
-    .filters-hidden {
-        transform: translateY(-160%);
-        opacity: 0;
-        pointer-events: none;
-    }
+    #filterSection { transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out; }
+    .filters-hidden { transform: translateY(-160%); opacity: 0; pointer-events: none; }
 </style>
 
 <script>
@@ -124,7 +116,6 @@ const padri = Object.keys(strutturaCategorie).sort();
     const categoryToggle = document.getElementById("categoryToggle");
     const mainDropdown = document.getElementById("mainDropdown");
     const categoryMenu = document.getElementById("categoryMenu");
-    const parentToggles = document.querySelectorAll(".parent-toggle");
     const filterButtons = document.querySelectorAll(".filter-btn");
     const currentCategoryText = document.getElementById("currentCategoryText");
     const searchBar = document.getElementById("searchBar") as HTMLInputElement;
@@ -133,13 +124,13 @@ const padri = Object.keys(strutturaCategorie).sort();
     let activeCategory = "all";
     let lastScrollY = window.scrollY;
 
-    // 1. LOGICA SCROLL (Nasconde la barra dei filtri)
+    // 1. LOGICA SCROLL
     window.addEventListener("scroll", () => {
         const currentScrollY = window.scrollY;
         if (filterSection) {
             if (currentScrollY > lastScrollY && currentScrollY > 400) {
                 filterSection.classList.add("filters-hidden");
-                mainDropdown?.classList.add("hidden"); // Chiude menu se aperto
+                mainDropdown?.classList.add("hidden");
             } else {
                 filterSection.classList.remove("filters-hidden");
             }
@@ -147,45 +138,42 @@ const padri = Object.keys(strutturaCategorie).sort();
         lastScrollY = currentScrollY;
     });
 
-    // 2. APERTURA MENU CATEGORIE
+    // 2. APRI/CHIUDI MENU
     categoryToggle?.addEventListener("click", () => {
         mainDropdown?.classList.toggle("hidden");
     });
 
-    // 3. GESTIONE SOTTOCATEGORIE (Click su Padre)
-    parentToggles.forEach(toggle => {
-        toggle.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const parent = toggle.closest('.sub-group-container');
-            const subMenu = parent?.querySelector('.sub-dropdown');
-            const arrow = toggle.querySelector('.arrow');
-            
-            subMenu?.classList.toggle("hidden");
-            arrow?.classList.toggle("rotate-90");
-
-            activeCategory = toggle.getAttribute('data-category') || "all";
-            updateFilter();
-        });
-    });
-
-    // 4. SELEZIONE CATEGORIA FINALE
+    // 3. GESTIONE CLICK SU TUTTI I FILTRI (Padri, Figli e Mostra Tutto)
     filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            activeCategory = btn.getAttribute('data-category') || "all";
-            if (currentCategoryText) currentCategoryText.textContent = btn.textContent?.trim() || "Tutte le Categorie";
+        btn.addEventListener('click', (e) => {
+            // Evitiamo che il click si propaghi se necessario
+            const cat = btn.getAttribute('data-category') || "all";
+            activeCategory = cat;
+
+            // Aggiorna il testo visualizzato sul bottone principale
+            if (currentCategoryText) {
+                if (cat === "all") {
+                    currentCategoryText.textContent = "Tutte le Categorie";
+                } else {
+                    // Prende il testo del bottone cliccato (pulito da freccette)
+                    currentCategoryText.textContent = btn.childNodes[0].textContent?.trim() || "Tutte le Categorie";
+                }
+            }
+
+            // Chiude il menu e aggiorna i prodotti
             mainDropdown?.classList.add("hidden");
             updateFilter();
         });
     });
 
-    // 5. CHIUSURA MENU CLICCANDO FUORI
+    // 4. CHIUSURA MENU CLICCANDO FUORI
     document.addEventListener("click", (e) => {
         if (!categoryMenu?.contains(e.target as Node)) {
             mainDropdown?.classList.add("hidden");
         }
     });
 
-    // 6. FUNZIONE FILTRAGGIO
+    // 5. FUNZIONE FILTRAGGIO
     function updateFilter() {
         const searchTerm = searchBar.value.toLowerCase();
         cards.forEach((card) => {
