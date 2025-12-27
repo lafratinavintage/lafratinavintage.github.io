@@ -2,11 +2,9 @@
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 
-// 1. Caricamento dati dai file .json
 const prodotti = await getCollection("catalogo");
 const baseUrl = import.meta.env.BASE_URL;
 
-// 2. Logica Categorie Padre/Figlio
 const strutturaCategorie = prodotti.reduce((acc, p) => {
     const catFull = p.data.categoria || "Altro";
     const [padre, figlio] = catFull.split('/');
@@ -18,13 +16,14 @@ const strutturaCategorie = prodotti.reduce((acc, p) => {
 const padri = Object.keys(strutturaCategorie).sort();
 ---
 
-<Layout titolo="La Nostra Collezione">
-    <section class="py-12">
-        <h1 class="text-4xl md:text-6xl font-display text-brand-orange leading-none tracking-tighter capitalize">
-            La Nostra Collezione
+<Layout titolo="Collezione">
+    <section class="py-16 text-center">
+        <h1 class="font-display text-5xl md:text-7xl text-brand-yellow relative inline-block mb-8">
+            Collezione
+            <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-orange"></span>
         </h1>
-        <p class="text-lg max-w-2xl text-brand-yellow font-body mt-4 italic">
-            Oggetti selezionati con cura, pronti a vivere una nuova storia.
+        <p class="text-lg md:text-xl max-w-2xl mx-auto text-white/90 font-body italic mt-4">
+            Oggetti selezionati con cura, restaurati per durare nel tempo.
         </p>
     </section>
 
@@ -35,30 +34,30 @@ const padri = Object.keys(strutturaCategorie).sort();
                     type="text" 
                     id="searchBar" 
                     placeholder="Cerca un mobile, una lampada..." 
-                    class="w-full h-full p-4 border-4 border-brand-brown shadow-retro focus:outline-none bg-white font-body" 
+                    class="w-full h-full p-4 border-2 border-brand-brown shadow-[6px_6px_0_rgba(255,107,53,0.3)] focus:outline-none bg-white font-body" 
                 />
             </div>
 
-            <div class="relative min-w-[280px]" id="categoryMenu">
-                <button id="categoryToggle" class="w-full h-full p-4 border-4 border-brand-brown bg-brand-yellow font-bold uppercase text-sm flex justify-between items-center shadow-retro">
+            <div class="relative min-w-[250px]" id="categoryMenu">
+                <button id="categoryToggle" class="w-full h-full p-4 border-2 border-brand-brown bg-brand-yellow font-bold uppercase text-sm flex justify-between items-center shadow-[6px_6px_0_rgba(0,168,120,0.3)]">
                     <span id="currentCategoryText">Tutte le Categorie</span>
                     <span class="ml-2">▼</span>
                 </button>
                 
-                <div id="mainDropdown" class="absolute top-[calc(100%+4px)] left-0 w-full bg-white border-4 border-brand-brown hidden z-50 shadow-retro max-h-[400px] overflow-y-auto no-scrollbar">
-                    <button class="w-full text-left p-3 hover:bg-brand-orange hover:text-white border-b-2 border-brand-brown uppercase text-xs font-bold filter-btn" data-category="all">
+                <div id="mainDropdown" class="absolute top-[calc(100%+4px)] left-0 w-full bg-white border-2 border-brand-brown hidden z-50 shadow-xl max-h-[400px] overflow-y-auto no-scrollbar">
+                    <button class="w-full text-left p-3 hover:bg-brand-orange hover:text-white border-b border-gray-100 uppercase text-xs font-bold filter-btn" data-category="all">
                         Mostra Tutto
                     </button>
                     
                     {padri.map(padre => (
                         <div class="relative sub-group-container">
-                            <button class="w-full text-left p-3 border-b-2 border-brand-brown flex justify-between items-center hover:bg-brand-orange hover:text-white uppercase text-xs font-bold filter-btn parent-toggle" data-category={padre}>
+                            <button class="w-full text-left p-3 border-b border-gray-100 flex justify-between items-center hover:bg-brand-orange hover:text-white uppercase text-xs font-bold filter-btn" data-category={padre}>
                                 {padre} 
                                 {strutturaCategorie[padre].size > 0 && <span class="text-[10px] transform transition-transform arrow">▶</span>}
                             </button>
                             
                             {strutturaCategorie[padre].size > 0 && (
-                                <div class="hidden bg-stone-50 border-b-2 border-brand-brown sub-dropdown">
+                                <div class="hidden bg-stone-50 border-b border-gray-200 sub-dropdown">
                                     {[...strutturaCategorie[padre]].sort().map(figlio => (
                                         <button class="w-full text-left p-3 pl-8 hover:bg-brand-yellow uppercase text-[10px] font-bold filter-btn" data-category={`${padre}/${figlio}`}>
                                             {figlio}
@@ -70,28 +69,38 @@ const padri = Object.keys(strutturaCategorie).sort();
                     ))}
                 </div>
             </div>
+
+            <div class="flex items-center gap-3 px-6 py-4 border-2 border-brand-brown bg-white shadow-[6px_6px_0_rgba(0,168,120,0.3)] h-full">
+                <input type="checkbox" id="availableOnly" class="w-5 h-5 accent-brand-orange cursor-pointer" />
+                <label for="availableOnly" class="font-bold uppercase text-xs cursor-pointer whitespace-nowrap">Solo disponibili</label>
+            </div>
         </div>
     </section>
 
     <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
         {prodotti.map((p) => (
-            <div class="product-card" data-nome={p.data.nome.toLowerCase()} data-categoria={p.data.categoria}>
-                <a href={`${baseUrl}catalogo/${p.id}`} class="block bg-white border-4 border-brand-brown shadow-retro hover:shadow-retro-hover transition-all overflow-hidden h-full group">
-                    <div class="aspect-square border-b-4 border-brand-brown overflow-hidden relative bg-brand-yellow/5">
+            <div class="product-card" data-nome={p.data.nome.toLowerCase()} data-categoria={p.data.categoria} data-disponibile={p.data.disponibile.toString()}>
+                <a href={`${baseUrl}catalogo/${p.id}`} class="block bg-white border-3 border-brand-brown shadow-[8px_8px_0_rgba(0,168,120,0.3)] hover:shadow-[12px_12px_0_rgba(255,107,53,0.4)] hover:-translate-y-1 transition-all duration-300 overflow-hidden h-full group">
+                    <div class="aspect-square border-b-3 border-brand-brown overflow-hidden relative">
                         <img 
                             src={p.data.imageUrls[0]} 
                             alt={p.data.nome} 
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                         />
+                        {!p.data.disponibile && (
+                            <div class="absolute inset-0 bg-white/40 flex items-center justify-center backdrop-blur-[2px] z-10">
+                                <span class="bg-brand-brown text-white px-4 py-2 font-display text-2xl rotate-[-5deg] shadow-lg border-2 border-white uppercase">Venduto</span>
+                            </div>
+                        )}
                     </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-display mb-1 leading-tight">{p.data.nome}</h3>
-                        <p class="text-[10px] font-bold text-brand-green uppercase tracking-[0.2em] mb-4">
+                        <h3 class="text-2xl font-display text-brand-green mb-1 leading-tight group-hover:text-brand-orange transition-colors">{p.data.nome}</h3>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">
                             {p.data.categoria.replace('/', ' / ')}
                         </p>
-                        <div class="flex justify-between items-center border-t-2 border-brand-brown pt-4 font-body">
-                            <span class="text-xs bg-brand-brown text-white px-2 py-1">{p.data.anno}</span>
-                            <span class="text-xl font-bold text-brand-orange">{p.data.prezzo} {p.data.valuta}</span>
+                        <div class="flex justify-between items-center border-t border-gray-100 pt-4 font-body">
+                            <span class="text-xs bg-brand-orange text-white px-3 py-1 font-bold">{p.data.anno}</span>
+                            <span class="text-xl font-bold text-brand-brown">{p.data.prezzo} {p.data.valuta}</span>
                         </div>
                     </div>
                 </a>
@@ -109,6 +118,8 @@ const padri = Object.keys(strutturaCategorie).sort();
 
     #filterSection { transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out; }
     .filters-hidden { transform: translateY(-160%); opacity: 0; pointer-events: none; }
+    
+    .border-3 { border-width: 3px; }
 </style>
 
 <script>
@@ -119,12 +130,13 @@ const padri = Object.keys(strutturaCategorie).sort();
     const filterButtons = document.querySelectorAll(".filter-btn");
     const currentCategoryText = document.getElementById("currentCategoryText");
     const searchBar = document.getElementById("searchBar") as HTMLInputElement;
+    const availableOnly = document.getElementById("availableOnly") as HTMLInputElement;
     const cards = document.querySelectorAll(".product-card");
 
     let activeCategory = "all";
     let lastScrollY = window.scrollY;
 
-    // 1. LOGICA SCROLL
+    // 1. SCROLL HIDE
     window.addEventListener("scroll", () => {
         const currentScrollY = window.scrollY;
         if (filterSection) {
@@ -138,56 +150,50 @@ const padri = Object.keys(strutturaCategorie).sort();
         lastScrollY = currentScrollY;
     });
 
-    // 2. APRI/CHIUDI MENU
+    // 2. TOGGLE MENU
     categoryToggle?.addEventListener("click", () => {
         mainDropdown?.classList.toggle("hidden");
     });
 
-    // 3. GESTIONE CLICK SU TUTTI I FILTRI (Padri, Figli e Mostra Tutto)
+    // 3. SELEZIONE CATEGORIA
     filterButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // Evitiamo che il click si propaghi se necessario
+        btn.addEventListener('click', () => {
             const cat = btn.getAttribute('data-category') || "all";
             activeCategory = cat;
-
-            // Aggiorna il testo visualizzato sul bottone principale
             if (currentCategoryText) {
-                if (cat === "all") {
-                    currentCategoryText.textContent = "Tutte le Categorie";
-                } else {
-                    // Prende il testo del bottone cliccato (pulito da freccette)
-                    currentCategoryText.textContent = btn.childNodes[0].textContent?.trim() || "Tutte le Categorie";
-                }
+                currentCategoryText.textContent = cat === "all" ? "Tutte le Categorie" : btn.childNodes[0].textContent?.trim();
             }
-
-            // Chiude il menu e aggiorna i prodotti
             mainDropdown?.classList.add("hidden");
             updateFilter();
         });
     });
 
-    // 4. CHIUSURA MENU CLICCANDO FUORI
+    // 4. CHIUDI FUORI
     document.addEventListener("click", (e) => {
         if (!categoryMenu?.contains(e.target as Node)) {
             mainDropdown?.classList.add("hidden");
         }
     });
 
-    // 5. FUNZIONE FILTRAGGIO
+    // 5. FILTRAGGIO
     function updateFilter() {
         const searchTerm = searchBar.value.toLowerCase();
+        const onlyAvailable = availableOnly.checked;
+
         cards.forEach((card) => {
             const element = card as HTMLElement;
             const nome = element.dataset.nome || "";
             const cat = element.dataset.categoria || "";
+            const disp = element.dataset.disponibile === "true";
 
             const matchesSearch = nome.includes(searchTerm);
             const matchesCat = activeCategory === "all" || cat === activeCategory || cat.startsWith(activeCategory + "/");
+            const matchesDisp = !onlyAvailable || disp;
 
-            element.style.display = (matchesSearch && matchesCat) ? "block" : "none";
+            element.style.display = (matchesSearch && matchesCat && matchesDisp) ? "block" : "none";
         });
     }
 
     searchBar?.addEventListener("input", updateFilter);
-    updateFilter();
+    availableOnly?.addEventListener("change", updateFilter);
 </script>
